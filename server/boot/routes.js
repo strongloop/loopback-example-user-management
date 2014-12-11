@@ -52,7 +52,7 @@ module.exports = function(app) {
   //send an email with instructions to reset an existing user's password
   app.post('/request-password-reset', function(req, res, next) {
     User.resetPassword({
-      email: req.body
+      email: req.body.email
     }, function(err) {
       if (err) return res.status(401).send(err);
 
