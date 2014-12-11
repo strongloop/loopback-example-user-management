@@ -53,7 +53,7 @@ module.exports = function(app) {
   app.post('/request-password-reset', function(req, res, next) {
     User.resetPassword({
       email: req.body.email
-    }, function(err, user) {
+    }, function(err) {
       if (err) return res.status(401).send(err);
 
       res.render('response', {
