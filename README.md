@@ -13,7 +13,7 @@ slc run
 - [How do you perform a password reset for a registered user](https://github.com/strongloop/loopback-faq-user-management#how-do-you-perform-a-password-reset-for-a-registered-user)
 
 ######Notes
-- You will need to [configure LoopBack to send email](https://github.com/strongloop/loopback-faq-email) for email related features.
+- You will need to [configure LoopBack to send email](https://github.com/strongloop/loopback-faq-email) for email related features
 - If you're using Gmail, you can simply [replace the user and pass](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/datasources.json#L19-L20) with your own credentials
 
 #How do you register a new user?
