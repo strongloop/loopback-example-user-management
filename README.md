@@ -1,9 +1,9 @@
 #loopback-faq-user-management
 ```
-git clone git@github.com:strongloop/loopback-faq-user-management.git
-cd loopback-faq-user-management
-npm install
-slc run
+$ git clone git@github.com:strongloop/loopback-faq-user-management.git
+$ cd loopback-faq-user-management
+$ npm install
+$ node .
 ```
 
 - [How do you register a new user?](https://github.com/strongloop/loopback-faq-user-management#how-do-you-register-a-new-user)
