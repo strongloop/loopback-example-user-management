@@ -26,7 +26,7 @@ $ node .
 - The [options](https://github.com/strongloop/loopback-faq-user-management/blob/master/common/models/user.js#L9-L17) are self-explanitory except `type`, `template` and `user`
   - `type` - value must be `email`
   - `template` - the path to the template to use for the verification email
-  - `user` - when provided, the information in the object will be used to in the verification link email
+  - `user` - when provided, the information in the object will be used in the verification link email
 
 #How do you send an email verification for a new user registration?
 See [step 2](https://github.com/strongloop/loopback-faq-user-management#how-do-you-register-a-new-user) in the previous question
