@@ -8,13 +8,14 @@ $ node .
 
 - [How do you register a new user?](https://github.com/strongloop/loopback-faq-user-management#how-do-you-register-a-new-user)
 - [How do you send an email verification for a new user registration?](https://github.com/strongloop/loopback-faq-user-management#how-do-you-send-an-email-verification-for-a-new-user-registration)
-- [How do you log a user in?](https://github.com/strongloop/loopback-faq-user-management#how-do-you-log-a-user-in)
-- [How do you log a user out?](https://github.com/strongloop/loopback-faq-user-management#how-do-you-log-a-user-out)
+- [How do you log in a user?](https://github.com/strongloop/loopback-faq-user-management#how-do-you-log-in-a-user)
+- [How do you log out a user?](https://github.com/strongloop/loopback-faq-user-management#how-do-you-log-out-a-user)
 - [How do you perform a password reset for a registered user](https://github.com/strongloop/loopback-faq-user-management#how-do-you-perform-a-password-reset-for-a-registered-user)
 
 ######Notes
 - You will need to [configure LoopBack to send email](https://github.com/strongloop/loopback-faq-email) for email related features
-- If you're using Gmail, you can simply [replace the user and pass](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/datasources.json#L19-L20) with your own credentials
+- If you're using Gmail, you can simply [replace the user and pass](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/datasources.json#L19-L20) with your own credentials.
+- You might need to temporarily allow "less secure" apps to access you email account. See [Allowing less secure apps to access your account](https://support.google.com/accounts/answer/6010255) for more information.
 
 #How do you register a new user?
 1. Create a [form](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/views/login.ejs#L21-L36) to gather sign up information
@@ -31,16 +32,16 @@ $ node .
 #How do you send an email verification for a new user registration?
 See [step 2](https://github.com/strongloop/loopback-faq-user-management#how-do-you-register-a-new-user) in the previous question
 
-#How do you log a user in?
+#How do you log in a user?
 1. Create a [form to accept login credentials](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/views/login.ejs#L2-L17)
 2. Create an [route to handle the login request](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/boot/routes.js#L20-L41)
 
-#How do you log a user out?
+#How do you log out a user?
 1. Create a [logout link with the access token embedded into the URL](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/views/home.ejs#L4)
 2. Call [`User.logout`](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/boot/routes.js#L45) with the access token
 
 ######Notes
-- We use the loopback token middleware to process access tokens for us. As long as you provide `access_token` in the query string of URL, the access token object will be provided in `req.accessToken` property in your route handler
+- We use the LoopBack token middleware to process access tokens. As long as you provide `access_token` in the query string of URL, the access token object will be provided in `req.accessToken` property in your route handler
 
 #How do you perform a password reset for a registered user?
 1. Create a [form to gather password reset info](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/views/login.ejs#L40-L51)
