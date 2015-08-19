@@ -14,8 +14,8 @@ $ node .
 
 ######Notes
 - You will need to [configure LoopBack to send email](https://github.com/strongloop/loopback-faq-email) for email related features
-- If you're using Gmail, you can simply [replace the user and pass](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/datasources.json#L19-L20) with your own credentials.
-- You might need to temporarily allow "less secure" apps to access you email account. See [Allowing less secure apps to access your account](https://support.google.com/accounts/answer/6010255) for more information.
+- If you're using GMail, you can simply [replace the user and pass](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/datasources.json#L19-L20) with your own credentials.
+- With GMail, you might need to temporarily allow "less secure" apps to access you email account. See [Allowing less secure apps to access your account](https://support.google.com/accounts/answer/6010255) for more information.
 
 #How do you register a new user?
 1. Create a [form](https://github.com/strongloop/loopback-faq-user-management/blob/master/server/views/login.ejs#L21-L36) to gather sign up information
