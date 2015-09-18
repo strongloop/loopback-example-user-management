@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = function(user) {
   //send verification email after registration
-  user.afterRemote('create', function(context, user) {
+  user.afterRemote('create', function(context, user, next) {
     console.log('> user.afterRemote triggered');
 
     var options = {
