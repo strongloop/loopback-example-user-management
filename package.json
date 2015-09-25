@@ -1,5 +1,5 @@
 {
-  "name": "loopback-faq-user-management",
+  "name": "loopback-example-user-management",
   "version": "0.0.0",
   "main": "server/server.js",
   "scripts": {
