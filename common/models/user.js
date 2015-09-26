@@ -16,18 +16,15 @@ module.exports = function(user) {
       user: user
     };
 
-    user.verify(options, function(err, response) {
-      if (err) {
-        next(err);
-        return;
-      }
+    user.verify(options, function(err, response, next) {
+      if (err) return next(err);
 
       console.log('> verification email sent:', response);
 
       context.res.render('response', {
         title: 'Signed up successfully',
-        content: 'Please check your email and click on the verification link '
-          + 'before logging in.',
+        content: 'Please check your email and click on the verification link ' +
+            'before logging in.',
         redirectTo: '/',
         redirectToLinkText: 'Log in'
       });
@@ -37,8 +34,8 @@ module.exports = function(user) {
   //send password reset link when requested
   user.on('resetPasswordRequest', function(info) {
     var url = 'http://' + config.host + ':' + config.port + '/reset-password';
-    var html = 'Click <a href="' + url + '?access_token=' + info.accessToken.id
-      + '">here</a> to reset your password';
+    var html = 'Click <a href="' + url + '?access_token=' +
+        info.accessToken.id + '">here</a> to reset your password';
 
     user.app.models.Email.send({
       to: info.email,

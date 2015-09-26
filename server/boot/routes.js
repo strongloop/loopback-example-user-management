@@ -4,7 +4,7 @@ module.exports = function(app) {
   var User = app.models.user;
 
   //login page
-  app.get('/', function(res, res) {
+  app.get('/', function(req, res) {
     var credentials = dsConfig.emailDs.transports[0].auth;
     res.render('login', {
       email: credentials.user,
@@ -78,9 +78,9 @@ module.exports = function(app) {
     if (!req.accessToken) return res.sendStatus(401);
 
     //verify passwords match
-    if (!req.body.password
-        || !req.body.confirmation
-        || req.body.password !== req.body.confirmation) {
+    if (!req.body.password ||
+        !req.body.confirmation ||
+        req.body.password !== req.body.confirmation) {
       return res.sendStatus(400, new Error('Passwords do not match'));
     }
 
