@@ -1,9 +1,11 @@
 {
   "name": "loopback-example-user-management",
   "version": "1.0.0",
+  "description": "LoopBack user management example",
   "main": "server/server.js",
   "scripts": {
     "pretest": "jshint .",
+    "start": "node .",
     "test": "tape tests/**/*.js"
   },
   "dependencies": {
@@ -24,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/strongloop/loopback-example-user-management"
+    "url": "git+https://github.com/strongloop/loopback-example-user-management.git"
   },
   "license": "MIT"
 }
