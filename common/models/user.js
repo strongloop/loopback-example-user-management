@@ -16,7 +16,7 @@ module.exports = function(user) {
       user: user
     };
 
-    user.verify(options, function(err, response, next) {
+    user.verify(options, function(err, response) {
       if (err) return next(err);
 
       console.log('> verification email sent:', response);
