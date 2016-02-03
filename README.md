@@ -51,3 +51,7 @@ See [step 2](https://github.com/strongloop/loopback-example-user-management#how-
 5. Create an [endpoint to process the password reset](https://github.com/strongloop/loopback-example-user-management/blob/master/server/boot/routes.js#L76-L99)
 
 - For the `resetPasswordRequest` handler callback, you are provided with an [`info`](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L38) object which contains information related to the user that is requesting the password reset
+
+---
+
+[More LoopBack examples](https://github.com/strongloop/loopback-example)
