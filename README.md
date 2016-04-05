@@ -62,7 +62,7 @@ See [step 2](https://github.com/strongloop/loopback-example-user-management#how-
 4. Create a [password reset form](https://github.com/strongloop/loopback-example-user-management/blob/master/server/views/password-reset.ejs#L2-L17) for the user to enter and confirm their new password
 5. Create an [endpoint to process the password reset](https://github.com/strongloop/loopback-example-user-management/blob/master/server/boot/routes.js#L76-L99)
 
-- For the `resetPasswordRequest` handler callback, you are provided with an [`info`](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L38) object which contains information related to the user that is requesting the password reset
+- For the `resetPasswordRequest` handler callback, you are provided with an [`info`](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L38) object which contains information related to the user that is requesting the password reset. Note that this example is set up to send an initial email to yourself (the FROM and TO fields are the same). You will eventually want to change the address in the FROM field. 
 
 ---
 
