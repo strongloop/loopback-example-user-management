@@ -22,8 +22,6 @@ module.exports = function(User) {
     };
 
     user.verify(options, function(err, response) {
-      // if (err) return next(err);
-
       if (err) {
         User.deleteById(user.id);
         return next(err);
