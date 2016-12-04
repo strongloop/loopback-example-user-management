@@ -32,12 +32,12 @@ All other files have not been modified from their defaults.
 
 ## How do you register a new user?
 1. Create a [form](https://github.com/strongloop/loopback-example-user-management/blob/master/server/views/login.ejs#L21-L36) to gather sign up information
-2. Create a [remote hook](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L5-L35) to [send a verification email](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L9-L34)
+2. Create a [remote hook](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L11-L40) to [send a verification email](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L24-L39)
 
 ###### Notes
-- Upon execution, [`user.verify`](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L19) sends an email using the provided [options](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L9-L17)
+- Upon execution, [`user.verify`](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L19) sends an email using the provided [options](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L14-L22)
 - The verification email is configured to [redirect the user to the `/verified` route](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L15) in our example. For your app, you should configure the redirect to match your use case
-- The [options](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L9-L17) are self-explanitory except `type`, `template` and `user`
+- The [options](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L14-L22) are self-explanitory except `type`, `template` and `user`
   - `type` - value must be `email`
   - `template` - the path to the template to use for the verification email
   - `user` - when provided, the information in the object will be used in the verification link email
@@ -64,7 +64,3 @@ See [step 2](https://github.com/strongloop/loopback-example-user-management#how-
 5. Create an [endpoint to process the password reset](https://github.com/strongloop/loopback-example-user-management/blob/master/server/boot/routes.js#L76-L99)
 
 - For the `resetPasswordRequest` handler callback, you are provided with an [`info`](https://github.com/strongloop/loopback-example-user-management/blob/master/common/models/user.js#L38) object which contains information related to the user that is requesting the password reset. Note that this example is set up to send an initial email to yourself (the FROM and TO fields are the same). You will eventually want to change the address in the FROM field. 
-
----
-
-[More LoopBack examples](https://github.com/strongloop/loopback-example)
