@@ -4,6 +4,7 @@
 // License text available at https://opensource.org/licenses/MIT
 
 var dsConfig = require('../datasources.json');
+var path = require('path');
 
 module.exports = function(app) {
   var User = app.models.user;
@@ -29,15 +30,24 @@ module.exports = function(app) {
       password: req.body.password
     }, 'user', function(err, token) {
       if (err) {
-        res.render('response', {
-          title: 'Login failed',
-          content: err,
-          redirectTo: '/',
-          redirectToLinkText: 'Try again'
-        });
+        if(err.details != null){
+          res.render('reponseToTriggerEmail', {
+            title: 'Login failed',
+            content: err,
+            redirectTo: '/',
+            redirectToLinkText: 'Click here',
+            userId: err.details.userId
+          });
+        }  
+        else
+          res.render('response', {
+            title: 'User does not exist',
+            content: err,
+            redirectTo: '/',
+            redirectToLinkText: 'Please sign up',
+          });
         return;
       }
-
       res.render('home', {
         email: req.body.email,
         accessToken: token.id
@@ -104,3 +114,4 @@ module.exports = function(app) {
     });
   });
 };
+

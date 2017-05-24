@@ -2,7 +2,9 @@
   "name": "user",
   "base": "User",
   "idInjection": true,
-  "properties": {},
+  "properties": {
+     "emailVerificationRequired": true
+  },
   "validations": [],
   "relations": {},
   "acls": [
