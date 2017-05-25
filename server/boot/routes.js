@@ -34,6 +34,7 @@ module.exports = function(app) {
           res.render('reponseToTriggerEmail', {
             title: 'Login failed',
             content: err,
+            redirectToEmail: '/api/users/'+ err.details.userId + '/verify',
             redirectTo: '/',
             redirectToLinkText: 'Click here',
             userId: err.details.userId
@@ -48,12 +49,14 @@ module.exports = function(app) {
           });
         return;
       }
+
       res.render('home', {
         email: req.body.email,
         accessToken: token.id
       });
     });
   });
+
 
   //log a user out
   app.get('/logout', function(req, res, next) {

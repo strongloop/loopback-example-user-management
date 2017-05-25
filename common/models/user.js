@@ -7,41 +7,6 @@ var config = require('../../server/config.json');
 var path = require('path');
 
 module.exports = function(User) {
-
-//send email again incase of unverified email
-User.triggerEmail = function(userId, cb) {
-  User.find({where: {id: userId}}, function(err, user)
-  {
-    const userObj = user[0];
-      var options = {
-      type: 'email',
-      to: userObj.email,
-      from: 'noreply@loopback.com',
-      subject: 'Thanks for registering.',
-      template: path.resolve(__dirname, '../../server/views/verify.ejs'),
-      redirect: '/verified',
-      user: userObj
-    };
-    userObj.verify(options, function(err, response) {
-      if (err) {
-        User.deleteById(userObj.id);
-        return next(err);
-      }
-      console.log('> verification email sent:', response);
-    });
-  })
-  cb(null, 'email triggered');
-};
-    User.remoteMethod(
-      'triggerEmail',
-      {
-        description: 'Triggere mail again incase of login failure with unverified email',
-        accepts: [
-          {arg: 'userId', type: 'string'}
-        ],
-        http: {verb: 'get'},
-      }
-    );
   //send verification email after registration
   User.afterRemote('create', function(context, user, next) {
     console.log('> user.afterRemote triggered');
@@ -61,9 +26,7 @@ User.triggerEmail = function(userId, cb) {
         User.deleteById(user.id);
         return next(err);
       }
-
       console.log('> verification email sent:', response);
-
       context.res.render('response', {
         title: 'Signed up successfully',
         content: 'Please check your email and click on the verification link ' +
@@ -72,6 +35,18 @@ User.triggerEmail = function(userId, cb) {
         redirectToLinkText: 'Log in'
       });
     });
+  });
+  
+  // Method to render
+  User.afterRemote('prototype.verify', function(context, user, next) {
+    console.log('> user.afterRemote for verify triggered');
+      context.res.render('response', {
+        title: 'A Link to reverify your identity has been sent to your email successfully',
+        content: 'Please check your email and click on the verification link ' +
+            'before logging in',
+        redirectTo: '/',
+        redirectToLinkText: 'Log in'
+      });
   });
 
   //send password reset link when requested
