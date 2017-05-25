@@ -1,0 +1,7 @@
+<h1><%= title %></h1>
+<% if (typeof content !== 'undefined') { %>
+  <p><%= content %></p>
+<% } %>
+<a href="/api/users/triggerEmail?userId=<%= userId %>"><%= redirectToLinkText %></a>
+for new email to complete registration or click 
+<a href="<%= redirectTo %>">home</a> to login.
