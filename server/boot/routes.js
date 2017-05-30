@@ -30,7 +30,7 @@ module.exports = function(app) {
       password: req.body.password
     }, 'user', function(err, token) {
       if (err) {
-        if(err.details != null){
+        if(err.details && err.code === 'LOGIN_FAILED_EMAIL_NOT_VERIFIED'){
           res.render('reponseToTriggerEmail', {
             title: 'Login failed',
             content: err,
@@ -40,23 +40,22 @@ module.exports = function(app) {
             userId: err.details.userId
           });
         }  
-        else
+        else{
           res.render('response', {
-            title: 'User does not exist',
+            title: 'Login failed. Wrong username or password',
             content: err,
             redirectTo: '/',
-            redirectToLinkText: 'Please sign up',
+            redirectToLinkText: 'Please login again',
           });
+        }
         return;
       }
-
       res.render('home', {
         email: req.body.email,
         accessToken: token.id
       });
     });
   });
-
 
   //log a user out
   app.get('/logout', function(req, res, next) {
@@ -87,7 +86,7 @@ module.exports = function(app) {
   app.get('/reset-password', function(req, res, next) {
     if (!req.accessToken) return res.sendStatus(401);
     res.render('password-reset', {
-      accessToken: req.accessToken.id
+      redirectUrl: '/reset-password?access_token=' + req.accessToken.id
     });
   });
 
@@ -101,12 +100,9 @@ module.exports = function(app) {
         req.body.password !== req.body.confirmation) {
       return res.sendStatus(400, new Error('Passwords do not match'));
     }
-
-    User.findById(req.accessToken.userId, function(err, user) {
+      User.setPassword(req.accessToken.userId, req.body.password,
+      function(err, user) {
       if (err) return res.sendStatus(404);
-      user.updateAttribute('password', req.body.password, function(err, user) {
-      if (err) return res.sendStatus(404);
-        console.log('> password reset processed successfully');
         res.render('response', {
           title: 'Password reset success',
           content: 'Your password has been reset successfully',
@@ -115,6 +111,4 @@ module.exports = function(app) {
         });
       });
     });
-  });
 };
-

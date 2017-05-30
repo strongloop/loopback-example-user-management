@@ -16,8 +16,8 @@
           "rejectUnauthorized": false
         },
         "auth": {
-          "user": "siddhi.pai@gmail.com",
-          "pass": "S5I12D90!"
+          "user": "email@address.com",
+          "pass": "password"
         }
       }
     ]

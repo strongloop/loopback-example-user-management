@@ -9,8 +9,6 @@ var path = require('path');
 module.exports = function(User) {
   //send verification email after registration
   User.afterRemote('create', function(context, user, next) {
-    console.log('> user.afterRemote triggered');
-
     var options = {
       type: 'email',
       to: user.email,
@@ -26,7 +24,6 @@ module.exports = function(User) {
         User.deleteById(user.id);
         return next(err);
       }
-      console.log('> verification email sent:', response);
       context.res.render('response', {
         title: 'Signed up successfully',
         content: 'Please check your email and click on the verification link ' +
@@ -39,14 +36,14 @@ module.exports = function(User) {
   
   // Method to render
   User.afterRemote('prototype.verify', function(context, user, next) {
-    console.log('> user.afterRemote for verify triggered');
-      context.res.render('response', {
-        title: 'A Link to reverify your identity has been sent to your email successfully',
-        content: 'Please check your email and click on the verification link ' +
-            'before logging in',
-        redirectTo: '/',
-        redirectToLinkText: 'Log in'
-      });
+    context.res.render('response', {
+      title: 'A Link to reverify your identity has been sent '+
+      'to your email successfully',
+      content: 'Please check your email and click on the verification link ' +
+      'before logging in',
+      redirectTo: '/',
+      redirectToLinkText: 'Log in'
+    });
   });
 
   //send password reset link when requested

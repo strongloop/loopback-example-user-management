@@ -50,3 +50,26 @@
     </fieldset>
   </form>
 </section>
+
+<section>
+  <form action="/request-password-change" method="post">
+    <fieldset>
+      <legend>Chanage password form</legend>
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" name="email" value="<%= email %>"/>
+      </div>
+      <div>
+        <label for="password">Old Password:</label>
+        <input type="password" name="oldPassword"/>
+      </div>
+      <div>
+        <label for="password">New Password:</label>
+        <input type="password" name="newPassword"/>
+      </div>
+      <div>
+        <input type="submit" value="Change password"/>
+      </div>
+    </fieldset>
+  </form>
+</section>
