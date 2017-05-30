@@ -33,8 +33,6 @@
   "user": {
     "dataSource": "db",
     "public": true,
-    "options": {
-       "emailVerificationRequired": true
-    }
+    "options": {}
   }
 }

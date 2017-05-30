@@ -39,8 +39,7 @@ module.exports = function(app) {
             redirectToLinkText: 'Click here',
             userId: err.details.userId
           });
-        }  
-        else{
+        } else{
           res.render('response', {
             title: 'Login failed. Wrong username or password',
             content: err,
@@ -52,7 +51,8 @@ module.exports = function(app) {
       }
       res.render('home', {
         email: req.body.email,
-        accessToken: token.id
+        accessToken: token.id,
+        redirectUrl: 'api/users/change-password?access_token=' + token.id
       });
     });
   });
@@ -86,44 +86,8 @@ module.exports = function(app) {
   app.get('/reset-password', function(req, res, next) {
     if (!req.accessToken) return res.sendStatus(401);
     res.render('password-reset', {
-      redirectUrl: '/reset-password?access_token=' + req.accessToken.id
-    });
-  });
-
-  //reset the user's pasword
-  app.post('/reset-password', function(req, res, next) {
-    if (!req.accessToken) return res.sendStatus(401);
-
-    //verify passwords match
-    if (!req.body.password ||
-        !req.body.confirmation ||
-        req.body.password !== req.body.confirmation) {
-      return res.sendStatus(400, new Error('Passwords do not match'));
-    }
-      User.setPassword(req.accessToken.userId, req.body.password,
-      function(err, user) {
-      if (err) return res.sendStatus(404);
-        res.render('response', {
-          title: 'Password reset success',
-          content: 'Your password has been reset successfully',
-          redirectTo: '/',
-          redirectToLinkText: 'Log in'
-        });
-      });
-    });
-
-  //change password for the user
-  app.post('/request-password-change', function(req, res, next) {
-    User.find({where: {email: req.body.email}}, function(err, user) {
-    const userObj = user[0];
-    User.changePassword(userObj.id, req.body.oldPassword, 
-    req.body.newPassword, function(err, response) {
-      if (err) 
-      {
-        return res.status(401).send(err);
-      }
-      console.log(response + ' change Password response');
-    });
+      redirectUrl: '/api/users/reset-password?access_token='+
+        req.accessToken.id
     });
   });
 };
