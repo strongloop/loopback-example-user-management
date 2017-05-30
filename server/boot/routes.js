@@ -111,4 +111,19 @@ module.exports = function(app) {
         });
       });
     });
+
+  //change password for the user
+  app.post('/request-password-change', function(req, res, next) {
+    User.find({where: {email: req.body.email}}, function(err, user) {
+    const userObj = user[0];
+    User.changePassword(userObj.id, req.body.oldPassword, 
+    req.body.newPassword, function(err, response) {
+      if (err) 
+      {
+        return res.status(401).send(err);
+      }
+      console.log(response + ' change Password response');
+    });
+    });
+  });
 };
