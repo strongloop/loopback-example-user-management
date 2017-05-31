@@ -39,7 +39,7 @@ module.exports = function(app) {
             redirectToLinkText: 'Click here',
             userId: err.details.userId
           });
-        } else{
+        } else {
           res.render('response', {
             title: 'Login failed. Wrong username or password',
             content: err,
@@ -52,7 +52,7 @@ module.exports = function(app) {
       res.render('home', {
         email: req.body.email,
         accessToken: token.id,
-        redirectUrl: 'api/users/change-password?access_token=' + token.id
+        redirectUrl: '/api/users/change-password?access_token=' + token.id
       });
     });
   });
