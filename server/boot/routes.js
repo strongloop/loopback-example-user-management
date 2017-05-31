@@ -4,6 +4,7 @@
 // License text available at https://opensource.org/licenses/MIT
 
 var dsConfig = require('../datasources.json');
+var path = require('path');
 
 module.exports = function(app) {
   var User = app.models.user;
@@ -29,18 +30,29 @@ module.exports = function(app) {
       password: req.body.password
     }, 'user', function(err, token) {
       if (err) {
-        res.render('response', {
-          title: 'Login failed',
-          content: err,
-          redirectTo: '/',
-          redirectToLinkText: 'Try again'
-        });
+        if(err.details && err.code === 'LOGIN_FAILED_EMAIL_NOT_VERIFIED'){
+          res.render('reponseToTriggerEmail', {
+            title: 'Login failed',
+            content: err,
+            redirectToEmail: '/api/users/'+ err.details.userId + '/verify',
+            redirectTo: '/',
+            redirectToLinkText: 'Click here',
+            userId: err.details.userId
+          });
+        } else {
+          res.render('response', {
+            title: 'Login failed. Wrong username or password',
+            content: err,
+            redirectTo: '/',
+            redirectToLinkText: 'Please login again',
+          });
+        }
         return;
       }
-
       res.render('home', {
         email: req.body.email,
-        accessToken: token.id
+        accessToken: token.id,
+        redirectUrl: '/api/users/change-password?access_token=' + token.id
       });
     });
   });
@@ -74,33 +86,8 @@ module.exports = function(app) {
   app.get('/reset-password', function(req, res, next) {
     if (!req.accessToken) return res.sendStatus(401);
     res.render('password-reset', {
-      accessToken: req.accessToken.id
-    });
-  });
-
-  //reset the user's pasword
-  app.post('/reset-password', function(req, res, next) {
-    if (!req.accessToken) return res.sendStatus(401);
-
-    //verify passwords match
-    if (!req.body.password ||
-        !req.body.confirmation ||
-        req.body.password !== req.body.confirmation) {
-      return res.sendStatus(400, new Error('Passwords do not match'));
-    }
-
-    User.findById(req.accessToken.userId, function(err, user) {
-      if (err) return res.sendStatus(404);
-      user.updateAttribute('password', req.body.password, function(err, user) {
-      if (err) return res.sendStatus(404);
-        console.log('> password reset processed successfully');
-        res.render('response', {
-          title: 'Password reset success',
-          content: 'Your password has been reset successfully',
-          redirectTo: '/',
-          redirectToLinkText: 'Log in'
-        });
-      });
+      redirectUrl: '/api/users/reset-password?access_token='+
+        req.accessToken.id
     });
   });
 };

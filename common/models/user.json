@@ -3,6 +3,8 @@
   "base": "User",
   "idInjection": true,
   "properties": {},
+  "restrictResetPasswordTokenScope": true,
+  "emailVerificationRequired": true,
   "validations": [],
   "relations": {},
   "acls": [

@@ -1,5 +1,25 @@
 <main>
   <h1>Hi <%= email %>.</h1>
   <p>Your accessToken is: <%= accessToken %></p>
+<section>
+    <form action="<%= redirectUrl %>" method="post">
+    <fieldset>
+      <legend>Change password form</legend>
+      <div>
+        <label for="password">Old Password:</label>
+        <input type="password" name="oldPassword"/>
+      </div>
+      <div>
+        <label for="password">New Password:</label>
+        <input type="password" name="newPassword"/>
+      </div>
+      <div>
+        <input type="submit" value="Change password"/>
+      </div>
+    </fieldset>
+  </form>
+</section>
+<br/>
+<br/>
   <a href="/logout?access_token=<%= accessToken %>">Log out</a>
 </main>
