@@ -48,6 +48,9 @@ module.exports = function(User) {
 
   //send password reset link when requested
   User.on('resetPasswordRequest', function(info) {
+    // note: on heroku etc an app needs to bind to 0.0.0.0,
+    // therefore config.host is not likely going to work correctly here,
+    // create another config variable
     var url = 'http://' + config.host + ':' + config.port + '/reset-password';
     var html = 'Click <a href="' + url + '?access_token=' +
         info.accessToken.id + '">here</a> to reset your password';
