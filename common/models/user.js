@@ -5,6 +5,7 @@
 
 var config = require('../../server/config.json');
 var path = require('path');
+var senderAddress = "noreply@loopback.com"; //Replace this address with your actual address
 
 module.exports = function(User) {
   //send verification email after registration
@@ -12,7 +13,7 @@ module.exports = function(User) {
     var options = {
       type: 'email',
       to: user.email,
-      from: 'noreply@loopback.com',
+      from: senderAddress,
       subject: 'Thanks for registering.',
       template: path.resolve(__dirname, '../../server/views/verify.ejs'),
       redirect: '/verified',
@@ -54,7 +55,7 @@ module.exports = function(User) {
 
     User.app.models.Email.send({
       to: info.email,
-      from: info.email,
+      from: senderAddress,
       subject: 'Password reset',
       html: html
     }, function(err) {
