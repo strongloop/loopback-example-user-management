@@ -7,6 +7,15 @@ var config = require('../../server/config.json');
 var path = require('path');
 
 module.exports = function(User) {
+  
+  User.getVerifyOptions = function() {
+    const defaultOptions = {
+      type: 'email',
+      from: 'noreply@loopback.com',
+    };
+    return Object.assign({}, this.settings.verifyOptions || defaultOptions);
+  };
+  
   //send verification email after registration
   User.afterRemote('create', function(context, user, next) {
     var options = {
