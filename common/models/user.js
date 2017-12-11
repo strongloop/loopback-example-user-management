@@ -8,6 +8,15 @@ var path = require('path');
 var senderAddress = "noreply@loopback.com"; //Replace this address with your actual address
 
 module.exports = function(User) {
+  
+  User.getVerifyOptions = function() {
+    const defaultOptions = {
+      type: 'email',
+      from: 'noreply@loopback.com',
+    };
+    return Object.assign({}, this.settings.verifyOptions || defaultOptions);
+  };
+  
   //send verification email after registration
   User.afterRemote('create', function(context, user, next) {
     var options = {
