@@ -14,8 +14,8 @@
     "cors": "^2.8.1",
     "strong-error-handler": "^1.1.0",
     "loopback": "^3.0.0",
-    "loopback-boot": "^2.4.0",
-    "loopback-component-explorer": "^2.1.0",
+    "loopback-boot": "^3.0.0",
+    "loopback-component-explorer": "^5.0.0",
     "serve-favicon": "^2.0.1"
   },
   "devDependencies": {
