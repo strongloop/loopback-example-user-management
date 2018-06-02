@@ -15,7 +15,7 @@
     "strong-error-handler": "^1.1.0",
     "loopback": "^3.0.0",
     "loopback-boot": "^2.4.0",
-    "loopback-component-explorer": "^5.3.0",
+    "loopback-component-explorer": "^6.0.0",
     "serve-favicon": "^2.0.1"
   },
   "devDependencies": {
