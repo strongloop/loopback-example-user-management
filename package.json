@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "LoopBack user management example",
   "main": "server/server.js",
+  "engines": {
+    "node": ">=6"
+  },
   "scripts": {
     "pretest": "jshint .",
     "start": "node .",
@@ -12,10 +15,10 @@
     "body-parser": "^1.10.0",
     "compression": "^1.0.3",
     "cors": "^2.8.1",
-    "strong-error-handler": "^1.1.0",
+    "strong-error-handler": "^3.2.0",
     "loopback": "^3.0.0",
     "loopback-boot": "^2.4.0",
-    "loopback-component-explorer": "^2.1.0",
+    "loopback-component-explorer": "^6.3.1",
     "serve-favicon": "^2.0.1"
   },
   "devDependencies": {
