@@ -29,5 +29,6 @@
     "type": "git",
     "url": "git+https://github.com/strongloop/loopback-example-user-management.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "author": "IBM Corp."
 }

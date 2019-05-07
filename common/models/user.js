@@ -1,4 +1,4 @@
-// Copyright IBM Corp. 2014,2015. All Rights Reserved.
+// Copyright IBM Corp. 2014,2019. All Rights Reserved.
 // Node module: loopback-example-user-management
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
